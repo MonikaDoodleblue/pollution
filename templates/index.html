@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <title>Predict Page</title>
+  </head>
+  <body class="index1">
+    <nav id="navbar">
+      <div>
+        <a href="{% url 'home' %}">Home</a>
+      </div>
+      <div>
+        <a href="{% url 'predict' %}">Predict</a>
+      </div>
+      <div>
+        <a href="{% url 'chart' %}">Chart</a>
+    </div>
+      <div>
+        <a href="{% url 'news' %}">News</a>
+      </div>
+      <div>
+        <a href="{% url 'login' %}">Logout</a>
+      </div>
+    </nav>
+    <div id="projects">
+      <div id="projects-container">
+        <div class="container1">
+          <form action="{% url 'predict' %}" method="post">
+            {% csrf_token %}
+            <fieldset class="fieldset1">
+              <legend class="legend1">
+                Air Quality Prediction
+              </legend>
+              <div class="row">
+                <div class="column">
+                  <label class="label1" for="AQI">ID</label>
+                  <input type="text" name="AQI" value="{{ request.POST.AQI }}"/>
+                </div>
+                <div class="column">
+                  <label class="label1" for="City">City</label>
+                  <input type="text" name="City" value="{{ request.POST.City }}"/>
+                </div>
+              </div>
+              <input class="input1" type="submit" value="Predict"/>
+              {% if prediction_text %}
+                <div>
+                  <center><b style="color: black;">{{ prediction_text.AQI_Bucket }}</b></center>
+                  <br>
+                  <ul>
+                    <div class="row1">
+                      <div class="column1">
+                        
+                        <li>PM10: {{ prediction_text.PM10 }}</li>
+                        <li>NO: {{ prediction_text.NO }}</li>
+                        <li>NO2: {{ prediction_text.NO2 }}</li>
+                        <li>NOx: {{ prediction_text.NOx }}</li>
+                        <li>NH3: {{ prediction_text.NH3 }}</li>
+                        <li>CO: {{ prediction_text.CO }}</li>
+                      </div>
+                      <div class="column1">
+                        <li>SO2: {{ prediction_text.SO2 }}</li>
+                        <li>O3: {{ prediction_text.O3 }}</li>
+                        <li>AQI: {{ prediction_text.AQI }}</li>
+                        <li>Benzene: {{ prediction_text.Benzene }}</li>
+                        <li>Toluene: {{ prediction_text.Toluene }}</li>
+                        <li>Xylene: {{ prediction_text.Xylene }}</li>
+                      </div>
+                    </div>
+                  </ul>
+                </div>
+              {% endif %}
+              {% if error_message %}<p style="color: red;">{{ error_message }}</p>{% endif %}
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html >
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/news.css' %}">
+        <title>NewsPage</title>
+    </head>
+    <body>
+        <nav id="navbar">
+            <div>
+                <a href="{% url 'home' %}">Home</a>
+            </div>
+            <div>
+                <a href="{% url 'predict' %}">Predict</a>
+            </div>
+            <div>
+                <a href="{% url 'chart' %}">Chart</a>
+            </div>
+            <div>
+                <a href="{% url 'news' %}">News</a>
+            </div>
+            <div>
+                <a href="{% url 'login' %}">Logout</a>
+            </div>
+        </nav>
+        <h1>
+            <center>News</center>
+        </h1>
+        <br>
+        <div class="grid-container">
+            {% for article in news_data.data %}
+                <div class="grid-item">
+                    {% if article.image %}
+                        <img src="{{ article.image }}"
+                             alt="{{ article.title }}"
+                             height="300"
+                             width="350">
+                    {% else %}
+                        <img src="{% static 'image/news.jpg' %}"
+                             alt="Default Image"
+                             height="300"
+                             width="350">
+                    {% endif %}
+                    <h2>{{ article.title }}</h2>
+                    <p>{{ article.description }}</p>
+                    <p>
+                        <a href="{{ article.url }}">Read more</a>
+                    </p>
+                </div>
+            {% endfor %}
+        </div>
+    </body>
+</html>

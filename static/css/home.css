@@ -1,0 +1,113 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+body {
+    font-family: 'Courier New', Courier, monospace;
+    letter-spacing: 0.5px;
+    overflow-x: hidden;
+}
+
+#navbar {
+    background: #5e227f;
+    position: sticky;
+    top: 0;
+    height: 40px;
+    width: 100vw;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 20px;
+    z-index: 1000;
+}
+
+#navbar a {
+    margin: 0 30px;
+    padding: 8px;
+    text-decoration-line: none;
+    font-size: 29px;
+    color: #f8b500;
+    font-weight: bolder;
+}
+
+#navbar div,
+.social-media {
+    position: relative;
+    z-index: 0;
+    padding: 5px;
+}
+
+#navbar div:before,
+.social-media:before {
+    content: '';
+    transition: 0.3s;
+}
+
+#navbar div:hover:before,
+.social-media:hover:before {
+    position: absolute;
+    width: 80%;
+    height: 90%;
+    top: -1px;
+    left: 15px;
+    z-index: -1;
+    background: #d22780;
+    transform: skewX(3deg) skewY(1.5deg);
+}
+
+#navbar div:nth-child(2):hover:before {
+    transform: skewX(-1deg) skewY(-2deg);
+}
+
+#welcome-section {
+    height: 93vh;
+    width: 100vw;
+    z-index: -2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: url("/static/image/img3.webp");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+}
+
+#welcome-section h1 {
+    margin: 20px;
+    font-size: 65px;
+    font-weight: bold;
+}
+
+#welcome-section h2 {
+    overflow: hidden;
+    border-right: .15em solid #f8b500;
+    white-space: nowrap;
+    margin: 0 auto;
+    font-size: 40px;
+    font-weight: 300;
+    letter-spacing: .15em;
+    animation:
+        typing 2s steps(30, end),
+        blink-caret .68s step-end infinite;
+}
+
+@keyframes typing {
+    from {
+        width: 0
+    }
+
+    to {
+        width: 38%;
+    }
+}
+
+@keyframes blink-caret {
+
+    from,
+    to {
+        border-color: transparent
+    }
+
+    50% {
+        border-color: #f8b500;
+    }
+}

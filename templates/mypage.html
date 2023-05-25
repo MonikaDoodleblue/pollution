@@ -1,0 +1,1075 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="https://codepen.io/mohammad-sharara/pen/MWeYVvN">
+  <title>Home Page</title>
+
+  <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        min-height: 100vh;
+        font-family: 'Courier New', Courier, monospace;
+        letter-spacing: 0.5px;
+        overflow-x: hidden;
+      }
+      #navbar {
+        background:#5e227f;
+        position: sticky;
+        top: 0;
+        height: 110px;
+        width: 100vw;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding-right: 20px;
+        z-index: 1000;
+      }
+      #navbar a {
+        margin: 0 30px;
+        padding: 8px;
+        text-decoration-line: none;
+        font-size: 29px;
+        color: #f8b500;
+        font-weight: bolder;
+      }
+      #navbar div, .social-media {
+        position: relative;
+        z-index: 0;
+        padding: 5px;
+      }
+      #navbar div:before,.social-media:before {
+        content:'';
+        transition: 0.3s;
+      }
+      #navbar div:hover:before,.social-media:hover:before {
+        position: absolute;
+        width: 80%;
+        height: 100%;
+        top: -1px;
+        left: 15px;
+        z-index: -1;
+        background: #d22780;
+        transform: skewX(3deg) skewY(1.5deg);
+      }
+      #navbar div:nth-child(2):hover:before {
+        transform: skewX(-1deg) skewY(-2deg);
+      }
+      #welcome-section {
+        background: #f2f4fb;
+        height: 100vh;
+        width: 100vw;
+        z-index: -2;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      #welcome-section h1 {
+        margin: 20px;
+        font-size: 65px;
+        font-weight: bold;
+      }
+      /*  The typewriting animation is credited to Geoff Graham on
+      https://css-tricks.com/   */
+      #welcome-section h2 {
+        overflow: hidden;
+        border-right: .15em solid #f8b500;
+        white-space: nowrap;
+        margin: 0 auto;
+        font-size: 40px;
+        font-weight: 300;
+        letter-spacing: .15em;
+        animation:
+          typing 2s steps(30,end),
+          blink-caret .68s step-end infinite;
+      }
+      @keyframes typing {
+        from { width: 0 }
+        to { width: 38%; }
+      }
+      
+      @keyframes blink-caret {
+        from, to { border-color: transparent }
+        50% { border-color: #f8b500; }
+      }
+      #projects {
+        background: #d22780;
+        width: 100%;
+        padding-bottom: 20px;
+        padding-top: 40px;
+      }
+      #projects-container {
+        display: flex;
+        min-height: 100vh;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+      }
+      .image-wrapper {
+        height: 30vw;
+        width: 40vw;
+      }
+      .project-title img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+      }
+      .project-title {
+        margin: 40px;
+        background: #BDBDBD;
+      }
+      .project-title h3 {
+        text-align: center;
+        background: #BDBDBD;
+        height: 90px;
+        width: 100%;
+        padding: 28px;
+        font-size: 22px;
+        transition: 0.3s;
+      }
+      .project-title:hover h3 {
+        background: #f2f4fb;
+      }
+      a {
+      text-decoration-line: none;
+      }
+      @media (max-width: 1210px) {
+        .image-wrapper {
+          width: 68vw;
+          height: 52vw;
+        }
+        #welcome-section h1 {
+          font-size: 1.9em;
+        }
+        #welcome-section h2 {
+          font-size: 1.5em;
+        }
+       
+        #navbar div a{
+          font-size: 1.2em;
+        }
+        #contact-links {
+          flex-direction: column;
+        }
+        #headings h1 {
+          font-size: 1em;
+          margin-top: 40px;
+        }
+        #headings h2 {
+          font-size: 10px;
+        }
+        #title {
+          max-width: 100vw;
+        }
+        .project-title h3 {
+          font-size: 1em;
+          height: 70px;
+        }
+        .social-media:nth-child(3):hover:before {
+          width: 139px;
+          left: 13px;
+        }
+      }
+      @media (min-width: 1600px) {
+        .image-wrapper {
+          height: 20vw;
+          width: 25vw;
+        }
+      }
+      #button {
+        margin: 50px 0;
+      }
+      #button div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-size: 24px;
+        font-weight: 700;
+        background: #BDBDBD;
+        width: 230px;
+        height: 40px;
+        margin: 0 auto;
+        transition: 0.6s  
+      }
+      #button div:hover {
+        background: #f8b500;
+      }
+      #button span {
+        color: initial;
+        transition: 0.6s;
+      }
+      #button:hover span{
+         color: #5e227f;
+      }
+      
+      #projects >h2{
+        padding: 50px;
+        font-size: 30px;
+        cursor: default;
+        background: #f8b500;
+      }
+      #title {
+        text-align: center;
+        background: #f8b500;
+        width: 470px;
+        margin: auto;
+        padding: 18px;
+      }
+      #contact {
+        display: flex;
+        min-height: 89vh;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        text-align: center;
+        background: #f8b500;
+        width: 100%;
+      }
+      #contact div {
+        margin: 30px;
+      }
+      #headings h1{
+        font-size: 25px;
+      }
+      #headings h2 {
+        font-size: 20px;
+        margin: 40px;
+      }
+      #contact-links {
+        display: flex;
+      }
+      .social-media {
+        margin: 0 100px;
+        font-size: 1.8em;
+        font-weight: 600;
+        display: flex;
+        justify-content: center;
+      }
+      .social-media:hover:before {
+        width: 138px;
+        left: -5px;
+      }
+      .social-media:first-child:hover:before {
+        width: 139px;
+        transform: skewX(-2deg) skewY(-2deg);
+        }
+      .social-media:nth-child(3):hover:before {
+      width: 110px;
+      transform: skewX(-1deg) skewY(-2deg);
+      }
+      #portrait img {
+      height: 120px;
+      width: 120px;
+      border-radius: 50%;
+      border: 4px solid #212121;
+      }
+      #footer {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        height: 140px;
+        padding: 20px 60px;
+        background: #212121;
+        color: #f8b500;
+        font-size: 1rem;
+        font-weight: 600;
+      }
+      svg {
+        height: 40px;
+        width: 40px;
+        margin: 10px;
+        vertical-align: middle;
+        border-radius: 50%;
+      }
+      .social-media span {
+        display: block;
+        color: #212121;
+      }
+      a:visited {
+        color: initial;
+      }
+      #projects a {
+        color: inherit;
+      }
+      @media (max-width: 450px) {
+       #navbar {
+          font-size: 0.7em;
+          height: 140px;
+          flex-direction: column;
+          justify-content: space-evenly;
+        }
+        #welcome-section h1 {
+          margin-top: 100px;
+          font-size: 1.4em;
+        }
+        #welcome-section h2 {
+          font-size: 1.1em;
+        }
+        #footer {
+          font-size: 15px;
+        }
+      }
+      @media (min-width: 700px) {
+          @keyframes typing {
+        from { width: 0 }
+        to { width: 35vw; }
+        }
+      }
+{% comment %} } ----------------login-------------{% endcomment %}
+
+th,td {
+    border-style: solid;
+    border-width: 5px;
+    border-color: #BCBCBC;
+    word-wrap: break-word;
+}
+.feed_table{
+        margin-left: 50px;
+        margin-right: 50px;
+}
+.index1{
+    background:url("/static/image/img2.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+}
+
+.container1{
+  width:700px;
+  padding:50px;
+  margin:0 auto;
+  
+background: -webkit-linear-gradient(101deg, rgb(36, 148, 248), rgb(183, 28, 239));
+background: linear-gradient(101deg, rgb(36, 148, 248), rgb(183, 28, 239));
+
+  box-shadow:0 4px 10px 0 rgba(0,0,0,.5);
+}
+.input1{
+  display:block;
+  width:400px;
+  padding:8px;
+  margin:20px 0;
+  border:1px solid #ddd;
+  border-radius:5px;
+  font-family:monaco,monospace;
+  font-size:14px;
+  background:rgba(255,255,255,0.5);
+  outline:2px solid white;
+  outline-offset:5px;
+  color:white;
+  font-weight:bold;
+  letter-spacing:2px;
+  
+}
+.fieldset1{
+  border:2px solid rgba(255,255,255,0.5);
+  padding:80px;
+}
+.legend1{
+  text-align:center;
+  text-transform:capitalize;
+  padding:8px;
+  border-radius:5px;
+   color:rgba(255,255,255,0.8);
+   background:rgba(255,255,255,0.5);
+  font-weight:bolder;
+  font-size:1.5em;
+}
+.input1[type="submit"] {
+  display:block;
+  width:420px;
+  padding:10px;
+  font-size:1.1em;
+  margin:40px 0;
+  border:1px solid #ddd;
+  font-weight:bold;
+  background:rgba(255,255,255,0.5);
+  color:white;
+  border-radius:5px;
+  outline:2px solid white;
+  outline-offset:5px;
+}
+.input1[type="submit"]:hover{
+  box-shadow:0 4px 15px 8px rgba(0,0,0,0.5);
+  cursor:pointer;
+}
+.input1::placeholder{
+  color:white;
+}
+.input1:focus{
+  outline:2px solid #EF9A9A;
+}
+.label1{
+  text-transform:capitalize;
+  letter-spacing:2px;
+   color:rgba(255,255,255,0.8);
+}
+</style>
+
+
+{% comment %}----------------prediction-------------{% endcomment %}
+
+</head>
+  <body class="index1">
+    <!--Welcome part-->
+    <nav id="navbar">
+        <div><a href="#welcome-section">About</a></div>
+        <div><a href="#projects">Prediction</a></div>
+        <div><a href="#contact">File</a></div>
+        <div><a href="{% url 'login' %}">Logout</a></div>
+    </nav>
+    <div id="welcome-section">
+        <h1>Prediction of Air pollution</h1>
+    </div>
+
+    <!--Projects Part-->
+    <div id="projects">
+        <div id="projects-container">
+            <div class="container1">
+                <form action="{% url 'predict' %}" method="post">
+                  <fieldset class="fieldset1">
+                    <legend class="legend1">Air Quality Prediction</legend>
+        
+                    <label class="label1" for="City">City</label>
+                    <input class="input1" type="text" name="City" value="{{ request.POST.City }}"/>
+        
+                    <label class="label1" for="PM2_5">PM2.5</label>
+                    <input class="input1" type="text" name="PM2_5" value="{{ request.POST.PM2_5 }}"/>
+                    
+                    <label class="label1" for="PM10">PM10</label>
+                    <input class="input1" type="text" name="PM10" value="{{ request.POST.PM10 }}"/>
+                    
+                    <label class="label1" for="NO">NO</label>
+                    <input class="input1" type="text" name="NO" value="{{ request.POST.NO }}"/>
+                    
+                    <label class="label1" for="NO2">NO2</label>
+                    <input class="input1" type="text" name="NO2" value="{{ request.POST.NO2 }}"/>
+        
+                    <label class="label1" for="NOx">NOx</label>
+                    <input class="input1" type="text" name="NOx" value="{{ request.POST.NOx }}"/>
+        
+                    <label class="label1" for="NH3">NH3</label>
+                    <input class="input1" type="text" name="NH3" value="{{ request.POST.NH3 }}"/>
+        
+                    <label class="label1" for="CO">CO</label>
+                    <input class="input1" type="text" name="CO" value="{{ request.POST.CO }}"/>
+        
+                    <label class="label1" for="SO2">SO2</label>
+                    <input class="input1" type="text" name="SO2" value="{{ request.POST.SO2 }}"/>
+        
+                    <label class="label1" for="O3">O3</label>
+                    <input class="input1" type="text" name="O3" value="{{ request.POST.O3 }}"/>
+        
+                    <label class="label1" for="Benzene">Benzene</label>
+                    <input class="input1" type="text" name="Benzene" value="{{ request.POST.Benzene }}"/>
+        
+                    <label class="label1" for="Toluene">Toluene</label>
+                    <input class="input1" type="text" name="Toluene" value="{{ request.POST.Toluene }}"/>
+                    
+                    <label class="label1" for="Xylene">Xylene</label>
+                    <input class="input1" type="text" name="Xylene" value="{{ request.POST.Xylene }}"/><br>
+        
+                    <input class="input1" type="submit" value="Predict"/><br>
+                    
+        
+                    <b><center style="color: red;">{{prediction_text | upper}}</center></b>	
+                    
+                    </div> 
+                  </fieldset>
+        
+                </form>
+        
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <!--Contact Part-->
+
+    <div id="contact">
+        <div id="headings">
+            <h1>At Your Service!</h1>
+            <h2>Are you ready to discuss your order?</h2>
+        </div>
+        <div id="contact-links">
+            <div class="social-media"><a href="https://github.com/msharara1998" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg><span>GitHub</span></a></div>
+            <div class="social-media"><a href="https://twitter.com/Mohamma97493188" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6.066 9.645c.183 4.04-2.83 8.544-8.164 8.544-1.622 0-3.131-.476-4.402-1.291 1.524.18 3.045-.244 4.252-1.189-1.256-.023-2.317-.854-2.684-1.995.451.086.895.061 1.298-.049-1.381-.278-2.335-1.522-2.304-2.853.388.215.83.344 1.301.359-1.279-.855-1.641-2.544-.889-3.835 1.416 1.738 3.533 2.881 5.92 3.001-.419-1.796.944-3.527 2.799-3.527.825 0 1.572.349 2.096.907.654-.128 1.27-.368 1.824-.697-.215.671-.67 1.233-1.263 1.589.581-.07 1.135-.224 1.649-.453-.384.578-.87 1.084-1.433 1.489z"/></svg><span>Twitter</span></a></div>
+            <div class="social-media"><a href="mailto:ms198mohammad@gmail.com?subject=Reaching%20Out&body=Hello%20World"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 .02c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6.99 6.98l-6.99 5.666-6.991-5.666h13.981zm.01 10h-14v-8.505l7 5.673 7-5.672v8.504z"/></svg><span>Email</span></a></div>
+        </div>
+        <div id="portrait">
+            <img src="https://raw.githubusercontent.com/msharara1998/freeCodeCamp-files/master/IMG_2713.jpg" alt="Personal Portrait">
+        </div>
+    </div>
+    <!--Footer-->
+    <div id="footer">
+        <span>Copyright &copy;2020 <br>Created by Mohammad Sharara</span>
+    </div>
+</body>
+</html> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+        <link rel="shortcut icon"
+              type="image/png"
+              href="{% static 'image/favicon.png' %}"/>
+        <link rel="shortcut icon"
+              type="image/png"
+              href="{% static 'favicon.ico' %}"/>
+        <link rel="stylesheet"
+              href="https://www.iqair.com/us/newsroom/how-can-i-access-air-pollution-data-through-airvisual-s-air-quality-api">
+        <link rel="stylesheet"
+              href="https://codepen.io/mohammad-sharara/pen/MWeYVvN">
+        <link rel="shortcut icon"
+              type="image/png"
+              href="{% static 'image/favicon.png' %}">
+        <script src="https://cdn.jsdelivr.net/npm/d3@6.7.0/dist/d3.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mpld3@0.5.5/dist/mpld3.min.js"></script>
+        <title>Home Page</title>
+        <style>
+  @import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+  * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+  }
+
+  body {
+      min-height: 100vh;
+      font-family: 'Courier New', Courier, monospace;
+      letter-spacing: 0.5px;
+      overflow-x: hidden;
+  }
+
+  #navbar {
+      background: #5e227f;
+      position: sticky;
+      top: 0;
+      height: 40px;
+      width: 100vw;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding-right: 20px;
+      z-index: 1000;
+  }
+
+  #navbar a {
+      margin: 0 30px;
+      padding: 8px;
+      text-decoration-line: none;
+      font-size: 29px;
+      color: #f8b500;
+      font-weight: bolder;
+  }
+
+  #navbar div,
+  .social-media {
+      position: relative;
+      z-index: 0;
+      padding: 5px;
+  }
+
+  #navbar div:before,
+  .social-media:before {
+      content: '';
+      transition: 0.3s;
+  }
+
+  #navbar div:hover:before,
+  .social-media:hover:before {
+      position: absolute;
+      width: 80%;
+      height: 90%;
+      top: -1px;
+      left: 15px;
+      z-index: -1;
+      background: #d22780;
+      transform: skewX(3deg) skewY(1.5deg);
+  }
+
+  #navbar div:nth-child(2):hover:before {
+      transform: skewX(-1deg) skewY(-2deg);
+  }
+
+  #welcome-section {
+      height: 100vh;
+      width: 100vw;
+      z-index: -2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: url("/static/image/img3.webp");
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: 100% 100%;
+  }
+
+  #welcome-section h1 {
+      margin: 20px;
+      font-size: 65px;
+      font-weight: bold;
+  }
+
+  /*  The typewriting animation is credited to Geoff Graham on
+    https://css-tricks.com/   */
+  #welcome-section h2 {
+      overflow: hidden;
+      border-right: .15em solid #f8b500;
+      white-space: nowrap;
+      margin: 0 auto;
+      font-size: 40px;
+      font-weight: 300;
+      letter-spacing: .15em;
+      animation:
+          typing 2s steps(30, end),
+          blink-caret .68s step-end infinite;
+  }
+
+  @keyframes typing {
+      from {
+          width: 0
+      }
+
+      to {
+          width: 38%;
+      }
+  }
+
+  @keyframes blink-caret {
+
+      from,
+      to {
+          border-color: transparent
+      }
+
+      50% {
+          border-color: #f8b500;
+      }
+  }
+
+  #projects {
+      background: url("/static/image/img2.jpg");
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: 100% 100%;
+  }
+
+  #projects-container {
+      display: flex;
+      min-height: 100vh;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+  }
+
+  .image-wrapper {
+      height: 30vw;
+      width: 40vw;
+  }
+
+  .project-title img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+  }
+
+  .project-title {
+      margin: 40px;
+      background: #BDBDBD;
+  }
+
+  .project-title h3 {
+      text-align: center;
+      background: #BDBDBD;
+      height: 90px;
+      width: 100%;
+      padding: 28px;
+      font-size: 22px;
+      transition: 0.3s;
+  }
+
+  .project-title:hover h3 {
+      background: #f2f4fb;
+  }
+
+  a {
+      text-decoration-line: none;
+  }
+
+  @media (max-width: 1210px) {
+      .image-wrapper {
+          width: 68vw;
+          height: 52vw;
+      }
+
+      #welcome-section h1 {
+          font-size: 1.9em;
+      }
+
+      #welcome-section h2 {
+          font-size: 1.5em;
+      }
+
+      #navbar div a {
+          font-size: 1.2em;
+      }
+
+      #contact-links {
+          flex-direction: column;
+      }
+
+      #line {
+          background: url("/static/image/img3.jpg");
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+          background-size: 100% 100%;
+      }
+
+      #title {
+          max-width: 100vw;
+      }
+
+      .project-title h3 {
+          font-size: 1em;
+          height: 70px;
+      }
+
+      .social-media:nth-child(3):hover:before {
+          width: 139px;
+          left: 13px;
+      }
+  }
+
+  @media (min-width: 1600px) {
+      .image-wrapper {
+          height: 20vw;
+          width: 25vw;
+      }
+  }
+
+  #button {
+      margin: 50px 0;
+  }
+
+  #button div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 24px;
+      font-weight: 700;
+      background: #BDBDBD;
+      width: 230px;
+      height: 40px;
+      margin: 0 auto;
+      transition: 0.6s
+  }
+
+  #button div:hover {
+      background: #f8b500;
+  }
+
+  #button span {
+      color: initial;
+      transition: 0.6s;
+  }
+
+  #button:hover span {
+      color: #5e227f;
+  }
+
+  #projects h2 {
+      padding: 50px;
+      font-size: 30px;
+      cursor: default;
+      background: #f8b500;
+  }
+
+  #title {
+      text-align: center;
+      background: #f8b500;
+      width: 470px;
+      margin: auto;
+      padding: 18px;
+  }
+
+  #contact {
+      display: flex;
+      min-height: 89vh;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+  }
+
+  #headings {
+      background: url("/static/image/img3.jpg");
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: 100% 100%;
+  }
+
+  #contact div {
+      margin: 30px;
+  }
+
+  #footer {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      height: 140px;
+      padding: 20px 60px;
+      background: #212121;
+      color: #f8b500;
+      font-size: 1rem;
+      font-weight: 600;
+  }
+
+
+  
+  th,
+  td {
+      border-style: solid;
+      border-width: 5px;
+      border-color: #BCBCBC;
+      word-wrap: break-word;
+  }
+
+  .feed_table {
+      margin-left: 50px;
+      margin-right: 50px;
+  }
+
+  .index1 {
+      background: url("/static/image/img2.jpg");
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: 100% 100%;
+  }
+
+  .container1 {
+      width: 700px;
+      padding: 50px;
+      margin: 0 auto;
+
+      background: -webkit-linear-gradient(101deg, rgb(36, 148, 248), rgb(183, 28, 239));
+      background: linear-gradient(101deg, rgb(36, 148, 248), rgb(183, 28, 239));
+
+      box-shadow: 0 4px 10px 0 rgba(0, 0, 0, .5);
+  }
+
+  .input1 {
+      display: block;
+      width: 400px;
+      padding: 8px;
+      margin: 20px 0;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-family: monaco, monospace;
+      font-size: 14px;
+      background: rgba(255, 255, 255, 0.5);
+      outline: 2px solid white;
+      outline-offset: 5px;
+      color: white;
+      font-weight: bold;
+      letter-spacing: 2px;
+
+  }
+
+  .fieldset1 {
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      padding: 80px;
+  }
+
+  .legend1 {
+      text-align: center;
+      text-transform: capitalize;
+      padding: 0px;
+      border-radius: 5px;
+      color: rgba(255, 255, 255, 0.8);
+      background: rgba(255, 255, 255, 0.5);
+      font-weight: bolder;
+      font-size: 1.5em;
+  }
+
+  .input1[type="submit"] {
+      display: block;
+      width: 420px;
+      padding: 10px;
+      font-size: 1.1em;
+      margin: 40px 0;
+      border: 1px solid #ddd;
+      font-weight: bold;
+      background: rgba(255, 255, 255, 0.5);
+      color: white;
+      border-radius: 5px;
+      outline: 2px solid white;
+      outline-offset: 5px;
+
+  }
+
+  .input1[type="submit"]:hover {
+      box-shadow: 0 4px 15px 8px rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+  }
+
+  .input1::placeholder {
+      color: white;
+  }
+
+  .input1:focus {
+      outline: 2px solid #EF9A9A;
+  }
+
+  .label1 {
+      text-transform: capitalize;
+      letter-spacing: 2px;
+      color: rgba(255, 255, 255, 0.8);
+  }
+
+  .row {
+      display: flex;
+      flex-wrap: wrap;
+  }
+
+  .column {
+      flex: 1;
+      margin: 0px;
+  }
+
+  .row1 {
+      display: flex;
+      flex-wrap: wrap;
+
+      cursor: pointer;
+      text-transform: capitalize;
+      letter-spacing: 2px;
+      text-transform: capitalize;
+      letter-spacing: 2px;
+      color: rgba(255, 255, 255, 0.8);
+  }
+
+  .column1 {
+      flex: 1;
+      margin: 10px;
+  }
+        </style>
+    </head>
+    <body>
+        <!--Welcome part-->
+        <nav id="navbar">
+            <div>
+                {% comment %} <a href="#welcome-section">Home</a> {% endcomment %}
+                <a href="{% url 'home' %}">Home</a>
+            </div>
+            <div>
+                {% comment %} <a href="#projects">Predict</a> {% endcomment %}
+                <a href="{% url 'predict' %}">Predict</a>
+            </div>
+            <div>
+                {% comment %} <a href="#contact">Chart</a> {% endcomment %}
+                {% comment %} <a href="{% url 'chart' %}">Chart</a> {% endcomment %}
+            </div>
+            <div>
+                <a href="{% url 'news' %}">News</a>
+            </div>
+            <div>
+                <a href="{% url 'login' %}">Logout</a>
+            </div>
+        </nav>
+        <div id="welcome-section">
+            <h1>Prediction Of</h1>
+            <h2>Air Pollutions</h2>
+        </div>
+        <!--Projects Part-->
+        <div id="projects">
+            <div id="projects-container">
+                <div class="container1">
+                    <form action="{% url 'predict' %}" method="post">
+                        {% csrf_token %}
+                        <fieldset class="fieldset1">
+                            <legend class="legend1">
+                                Air Quality Prediction
+                            </legend>
+                            <div class="row">
+                                <div class="column">
+                                    <label class="label1" for="AQI">ID</label>
+                                    <input type="text" name="AQI" value="{{ request.POST.AQI }}"/>
+                                </div>
+                                <div class="column">
+                                    <label class="label1" for="City">City</label>
+                                    <input type="text" name="City" value="{{ request.POST.City }}"/>
+                                </div>
+                            </div>
+                            <input class="input1" type="submit" value="Predict"/>
+                            {% if prediction_text %}
+                                <div>
+                                    <center><b style="color: black;">{{ prediction_text.AQI_Bucket }}</b></center>
+                                    <br>
+                                    <ul>
+                                        <div class="row1">
+                                            <div class="column1">
+                                                <li>AQI: {{ prediction_text.AQI }}</li>
+                                                <li>PM10: {{ prediction_text.PM10 }}</li>
+                                                <li>NO: {{ prediction_text.NO }}</li>
+                                                <li>NO2: {{ prediction_text.NO2 }}</li>
+                                                <li>NOx: {{ prediction_text.NOx }}</li>
+                                                <li>NH3: {{ prediction_text.NH3 }}</li>
+                                            </div>
+                                            <div class="column1">
+                                                <li>CO: {{ prediction_text.CO }}</li>
+                                                <li>SO2: {{ prediction_text.SO2 }}</li>
+                                                <li>O3: {{ prediction_text.O3 }}</li>
+                                                <li>Benzene: {{ prediction_text.Benzene }}</li>
+                                                <li>Toluene: {{ prediction_text.Toluene }}</li>
+                                                <li>Xylene: {{ prediction_text.Xylene }}</li>
+                                            </div>
+                                        </div>
+                                    </ul>
+                                </div>
+                            {% endif %}
+                            {% if error_message %}<p style="color: red;">{{ error_message }}</p>{% endif %}
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% comment %} <div id="contact">
+            <h1>Air Pollution Data Chart</h1>
+            <img src="{% url 'chart' %}" alt="Air Pollution Data Chart">
+            <br>
+        </div> {% endcomment %}
+    </body>
+</html>
